@@ -80,6 +80,15 @@ const sign_in = async(req, res)=>{
         res.json('Wrong credential')
     }
 }
+
+const profile = async(req, res)=>{
+    const get_user = await User.find({_id:req.user.id})
+    if(get_user){
+        res.json(get_user)
+    } else{
+        res.json('Unexisting user')
+    }
+}
 const generateToken = (id)=>{
     return jwt.sign({id}, process.env.JWT_SECRET||'admin123',{expiresIn:'30d'})
 }
@@ -87,5 +96,6 @@ const generateToken = (id)=>{
 module.exports = {
     getMe,
     registerUser,
-    sign_in
+    sign_in,
+    profile
 }
