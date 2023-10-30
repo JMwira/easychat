@@ -64,11 +64,28 @@ const registerUser = async(req, res)=>{
         }
     }
 }
+
+
+const sign_in = async(req, res)=>{
+    const {phone, Code} = req.body
+    const get_user = await User.findOne({phone:phone})
+    if(get_user){
+        const code  = get_user.code
+        if(code==Code){
+            res.json({token:generateToken(get_user._id)})
+        } else{
+            res.json("wrong credentials")
+        }
+    } else{
+        res.json('Wrong credential')
+    }
+}
 const generateToken = (id)=>{
     return jwt.sign({id}, process.env.JWT_SECRET||'admin123',{expiresIn:'30d'})
 }
 
 module.exports = {
     getMe,
-    registerUser
+    registerUser,
+    sign_in
 }
