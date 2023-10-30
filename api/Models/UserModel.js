@@ -25,13 +25,15 @@ const userSchema = mongoose.Schema({
         type:String,
         minLength:3
     },
+    code:{
+        type:String
+    },
     active:{
         type:Boolean,
         default:false
     },
     avatar:{
-        type:Buffer,
-        required:true
+        type:Buffer
     }
 },{
  timestamps:true

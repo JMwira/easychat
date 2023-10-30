@@ -3,5 +3,6 @@ const { getMe, registerUser, updateUser, deleteUser } = require('../Controllers/
 const router = express.Router()
 
 router.get('/', getMe)
+router.post('/', registerUser)
 
 module.exports = router
